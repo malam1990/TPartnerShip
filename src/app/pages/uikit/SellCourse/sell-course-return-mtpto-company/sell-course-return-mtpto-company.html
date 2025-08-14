@@ -1,0 +1,92 @@
+<form #partnerForm="ngForm" (ngSubmit)="submitSellCourseToMasterPartnerForm()">
+    <p-fluid>
+
+        <div class="flex mt-8">
+
+            <div class="card flex flex-col gap-6 w-full">
+                <div class="font-semibold text-xl   pButton  p-ripple">
+                </div>
+                <div class="custom-theme-btn p-ripple font-semibold text-md">
+                    MASTER TALLY PARTNER RETURN COURSE TO COMPNAY
+                </div>
+
+                <!-- <input pInputText id="partnerid" type="hidden" [(ngModel)]="SellCourseToMasterPartnerForm.CourseQtyId" name="partnerid"   [ngModelOptions]="{standalone: true}" />
+                  -->
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="SerailNo">Master Tally Partner Name</label>
+                        <p-select [(ngModel)]="MasterTallyPartnerReturnCourseToCompanyFrom.PartnerId"
+                            [options]="MasterTallyPartnerList" optionValue="partnerid" optionLabel="partnerName"
+                            placeholder="Select Course" class="w-full" [ngModelOptions]="{standalone: true}">
+                        </p-select>
+                    </div>
+
+
+                    To
+
+
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">Company Name Type</label>
+                        <p-select [(ngModel)]="MasterTallyPartnerReturnCourseToCompanyFrom.CompanyId"
+                            [options]="CompanyList" optionValue="companyId" optionLabel="companyName"
+                            placeholder="Select Company" class="w-full" [ngModelOptions]="{standalone: true}">
+                        </p-select>
+
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="SerailNo">Return Course Name</label>
+                        <p-select [(ngModel)]="MasterTallyPartnerReturnCourseToCompanyFrom.CourseId"
+                            [options]="CourseList" optionValue="courseId" optionLabel="courseName"
+                            placeholder="Select Course" class="w-full" [ngModelOptions]="{standalone: true}">
+                        </p-select>
+                    </div>
+
+                </div>
+
+
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">Return Course Quantity</label>
+                        <input pInputText id="Quantity" type="text"
+                            [(ngModel)]="MasterTallyPartnerReturnCourseToCompanyFrom.Quantity" name="Quantity"
+                            [ngModelOptions]="{standalone: true}" />
+
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">REGISTRATION DATE</label>
+                        <input pInputText id="firstname2" type="text"  />
+                    </div>
+                                 </div> -->
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-col md:flex-row gap-2 justify-center">
+                        <button pButton type="submit"> {{ MasterTallyPartnerReturnCourseToCompanyFrom.Id ? 'Update' :
+                            'Submit' }}</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </p-fluid>
+
+</form>

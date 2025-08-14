@@ -1,0 +1,93 @@
+
+<form #partnerForm="ngForm" (ngSubmit)="submitSellCourseToTallyPartnerForm()" >
+<p-fluid>
+
+        <div class="flex mt-8">
+            
+            <div class="card flex flex-col gap-6 w-full" >
+                <div class="font-semibold text-xl   pButton  p-ripple" > Sell Course To Tally Partner </div>
+               
+            <!-- <input pInputText id="partnerid" type="hidden" [(ngModel)]="SellCourseToMasterPartnerForm.CourseQtyId" name="partnerid"   [ngModelOptions]="{standalone: true}" />
+                  -->
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">Company Name Type</label>
+                         <p-select [(ngModel)]="SellCourseToTallyPartnerForm.CompanyId"
+          [options]="CompanyList"
+          optionValue="companyId"
+          optionLabel="companyName"
+          placeholder="Select Company"
+          class="w-full"
+          [ngModelOptions]="{standalone: true}">
+        </p-select>
+                       
+                       </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="SerailNo">Course Name</label>
+                        <p-select [(ngModel)]="SellCourseToTallyPartnerForm.CourseId"
+                        [options]="CourseList"
+                        optionValue="courseId"
+                            optionLabel="courseName"
+                             placeholder="Select Course"
+                                class="w-full"
+                                [ngModelOptions]="{standalone: true}">
+                      </p-select>
+                    </div>
+
+                         <div class="flex flex-wrap gap-2 w-full">
+                        <label for="SerailNo">Tally Partner Name</label>
+                        <p-select [(ngModel)]="SellCourseToTallyPartnerForm.TallypartnerId"
+                        [options]="TallyPartnerLists"
+                        optionValue="tallypartnerId"
+                            optionLabel="tpname"
+                             placeholder="Select Tally Partner NAme"
+                                class="w-full"
+                                [ngModelOptions]="{standalone: true}">
+                      </p-select>
+                    </div>
+                </div>
+              
+                   
+             
+            <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">Sell Course  quantity</label>
+                          <input pInputText id="Quantity" type="text"   [(ngModel)]="SellCourseToTallyPartnerForm.Quantity" name="Quantity"   [ngModelOptions]="{standalone: true}" />
+                       
+                       </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                     
+                    </div>
+                </div>
+              
+
+
+                
+         
+             
+   
+
+                 
+
+
+
+                     <!-- <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">REGISTRATION DATE</label>
+                        <input pInputText id="firstname2" type="text"  />
+                    </div>
+                                 </div> -->
+                    <div class="flex flex-col md:flex-row gap-2 justify-center">
+                   <button pButton type="submit">  {{ SellCourseToTallyPartnerForm.Id ? 'Update' : 'Submit' }}</button>
+                    
+
+                </div>
+            </div>
+        
+        </div>
+
+         
+    </p-fluid>
+
+</form>
+

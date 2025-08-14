@@ -1,0 +1,64 @@
+<form (ngSubmit)="submitTallyPartnerForm()" #partnerForm="ngForm">
+    <p-fluid>
+        <div class="flex mt-8">
+            <div class="card flex flex-col gap-6 w-full">
+                <div class="custom-theme-btn p-ripple font-semibold text-xl">
+                    COMPANY ADD COURSE QUANTITY DETAILS
+                </div>
+                <input pInputText id="partnerid" type="hidden" [(ngModel)]="CourseQuantityForm.CourseQtyId"
+                    name="partnerid" [ngModelOptions]="{standalone: true}" />
+                <div class="flex flex-col md:flex-row gap-12">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">Company Name Type</label>
+                        <p-select [(ngModel)]="CourseQuantityForm.CompanyId" [options]="CompanyList"
+                            optionValue="companyId" optionLabel="companyName" placeholder="Select Company"
+                            class="w-full" [ngModelOptions]="{standalone: true}">
+                        </p-select>
+
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="SerailNo">Course Name <span class="text-red-500">*</span></label>
+                        <p-select [(ngModel)]="CourseQuantityForm.courseId" name="courseId" required
+                            #courseIdRef="ngModel" [options]="CourseList" optionValue="courseId"
+                            optionLabel="courseName" placeholder="Select Course" class="w-full"
+                            [ngModelOptions]="{standalone: false}">
+                        </p-select>
+
+                        <!-- Validation Error Message -->
+                        <small *ngIf="courseIdRef.invalid && courseIdRef.touched" class="text-red-500">
+                            Course selection is required.
+                        </small>
+                    </div>
+                       <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">COURSE QUANTITY</label>
+                        <input pInputText id="EmailId" type="text" [(ngModel)]="CourseQuantityForm.CourseQuantity"
+                            name="EmailId" [ngModelOptions]="{standalone: true}" />
+
+                    </div>
+
+                </div>
+                <!-- <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">COURSE QUANTITY</label>
+                        <input pInputText id="EmailId" type="text" [(ngModel)]="CourseQuantityForm.CourseQuantity"
+                            name="EmailId" [ngModelOptions]="{standalone: true}" />
+
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+
+                    </div>
+                </div> -->
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-col md:flex-row gap-2 justify-center">
+                        <button pButton type="submit"> {{ CourseQuantityForm.CourseQtyId ? 'Update' : 'Submit'
+                            }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-toast></p-toast>
+
+    </p-fluid>
+
+</form>

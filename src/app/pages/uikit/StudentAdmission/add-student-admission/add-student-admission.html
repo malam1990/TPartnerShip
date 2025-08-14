@@ -1,0 +1,387 @@
+<p-toolbar styleClass="mb-6">
+  <ng-template #start>
+    <p-button label="student Admission" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+
+  </ng-template>
+</p-toolbar>
+
+<p-dialog [(visible)]="AddStudentAdmissionDialog" [style]="{ width: '640px' }" header="Student Admission From"
+  [modal]="true">
+  <ng-template #content>
+    <div class="flex flex-col gap-6">
+      <div class="col-span-6">
+        <label for="price" class="block font-bold mb-3">Certificate</label>
+        <p-select [(ngModel)]="studentFormData.courseId" [options]="CourseList" optionLabel="label" optionValue="value"
+          placeholder="Select Course" class="w-full" [ngModelOptions]="{standalone: true}">
+        </p-select>
+
+      </div>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6">
+          <label for="firstName" class="block font-bold mb-3">First Name</label>
+          <input type="text" pInputText id="firstName" [(ngModel)]="studentFormData.firstName" required autofocus
+            fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.firstName">First Name is required.</small>
+        </div>
+        <div class="col-span-6">
+          <label for="quantity" class="block font-bold mb-3">Last Name</label>
+          <input type="text" pInputText id="lastname" [(ngModel)]="studentFormData.lastName" required autofocus fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.lastName">Last Name is required.</small>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6">
+          <label for="fathername" class="block font-bold mb-3">Father Name </label>
+          <input type="text" pInputText id="fathername" [(ngModel)]="studentFormData.fathername" required autofocus
+            fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.fathername">Father Name is required.</small>
+        </div>
+        <div class="col-span-6">
+          <label for="mothername" class="block font-bold mb-3">Mother Name</label>
+          <input type="text" pInputText id="mothername" [(ngModel)]="studentFormData.mothername" required autofocus
+            fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.mothername">Mother Name is required.</small>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6">
+          <label for="email" class="block font-bold mb-3">Email</label>
+          <input type="text" pInputText id="email" [(ngModel)]="studentFormData.email" required autofocus fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.email">Email is required.</small>
+        </div>
+        <div class="col-span-6">
+          <label for="phone" class="block font-bold mb-3">Phone</label>
+          <input type="text" pInputText id="phone" [(ngModel)]="studentFormData.phone" required autofocus fluid />
+          <!-- <small class="text-red-500" *ngIf="submitted && !studentFormData.phone">Email is required.</small> -->
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6">
+          <label for="mobileNo" class="block font-bold mb-3">Mobile No</label>
+          <input type="text" pInputText id="mobileNo" [(ngModel)]="studentFormData.mobileNo" required autofocus fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.mobileNo">Mobile is required.</small>
+        </div>
+        <div class="col-span-6">
+          <label for="gender" class="block font-bold mb-3">Gender</label>
+          <p-select [(ngModel)]="studentFormData.gender" inputId="inventoryStatus" [options]="genders"
+            optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.gender">Gender is required.</small>
+        </div>
+        <div class="col-span-6">
+          <label for="icondisplay" class="font-bold block mb-2"> dateOfBirth </label>
+          <p-datepicker [(ngModel)]="studentFormData.dateOfBirth" [iconDisplay]="'input'" [showIcon]="true"
+            inputId="icondisplay" class="w-full " />
+        </div>
+      </div>
+
+
+      <div>
+        <label for="Address" class="block font-bold mb-3">Address</label>
+        <textarea id="Address" pTextarea [(ngModel)]="studentFormData.address" required rows="3" cols="20"
+          fluid></textarea>
+        <small class="text-red-500" *ngIf="submitted && !studentFormData.address">address is required.</small>
+      </div>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6">
+          <label for="city" class="block font-bold mb-3">City</label>
+          <input type="text" pInputText id="city" [(ngModel)]="studentFormData.city" required autofocus fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.city">city is required.</small>
+        </div>
+        <div class="col-span-6">
+          <label for="state" class="block font-bold mb-3">state</label>
+          <input type="text" pInputText id="state" [(ngModel)]="studentFormData.state" required autofocus fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.state">state is required.</small>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6">
+          <label for="country" class="block font-bold mb-3">country</label>
+          <input type="text" pInputTex id="country" [(ngModel)]="studentFormData.country" required autofocus fluid />
+          <small class="text-red-500" *ngIf="submitted && !studentFormData.country">country is required.</small>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-6">
+          <p-button label="Add Qualification" icon="pi pi-plus" severity="secondary" class="mr-2"
+            (onClick)="QualificationopenNew()" />
+        </div>
+        <div class="col-span-6">
+
+          <p-button label="Add Documents" icon="pi pi-plus" severity="secondary" class="mr-2"
+            (onClick)="studentdocumentDialogNOpenew()" />
+        </div>
+      </div>
+
+
+
+      <!-- <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.image" class="block m-auto pb-4"/> -->
+
+
+
+
+    </div>
+  </ng-template>
+
+  <ng-template #footer>
+    <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+    <p-button label="Save" icon="pi pi-check" (click)="saveStudent()" />
+  </ng-template>
+</p-dialog>
+
+
+
+
+
+
+<p-dialog [(visible)]="qualificationDialog" [style]="{ width: '800px' }" header="Add Qualification" [modal]="true">
+  <ng-template #content>
+    <div class="flex flex-col gap-6">
+
+      <div *ngFor="let q of qualifications; let i = index" class="grid grid-cols-12 gap-4 items-end">
+
+        <div class="col-span-3">
+          <label class="block font-bold mb-3">Qualification Name</label>
+          <p-select [(ngModel)]="q.qualificationName" [options]="statusses" optionLabel="label" optionValue="value"
+            placeholder="Select Qualification" fluid>
+          </p-select>
+        </div>
+
+        <div class="col-span-3">
+          <label class="block font-bold mb-3">Board / University</label>
+          <input pInputText [(ngModel)]="q.boardUniversity" class="w-full" />
+        </div>
+
+        <div class="col-span-2">
+          <label class="block font-bold mb-3">Year</label>
+          <p-inputNumber [(ngModel)]="q.year" [min]="1900" [max]="2099" fluid></p-inputNumber>
+        </div>
+
+        <div class="col-span-2">
+          <label class="block font-bold mb-3">Percentage</label>
+          <p-inputNumber [(ngModel)]="q.percentage" [min]="0" [max]="100" fluid></p-inputNumber>
+        </div>
+
+        <div class="col-span-2">
+          <label class="block font-bold mb-3">Grade</label>
+          <input pInputText [(ngModel)]="q.grade" class="w-full" />
+        </div>
+
+        <div class="col-span-12 flex justify-end gap-2">
+          <p-button icon="pi pi-plus" label="Add" (click)="addQualification()" />
+          <p-button icon="pi pi-trash" severity="danger" *ngIf="qualifications.length > 1"
+            (click)="removeQualification(i)" label="Remove" />
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #footer>
+    <p-button label="Cancel" icon="pi pi-times" text (click)="qualificationDialog = false" />
+    <p-button label="Save" icon="pi pi-check" (click)="saveQualifications()" />
+  </ng-template>
+</p-dialog>
+
+
+
+<p-dialog [(visible)]="studentdocumentDialog" [style]="{ width: '800px' }" header="Add Document" [modal]="true">
+  <ng-template #content>
+    <div class="flex flex-col gap-6">
+
+      <div *ngFor="let doc of studentFormData.documents; let i = index" class="grid grid-cols-12 gap-4 items-end">
+        <div class="col-span-4">
+          <label class="block font-bold mb-3">Document Name</label>
+          <p-select [(ngModel)]="doc.documentName" [options]="statuses" optionLabel="label" optionValue="value"
+            placeholder="Select Document" fluid>
+          </p-select>
+        </div>
+
+        <div class="col-span-4">
+          <label class="block font-bold mb-3">Document Type</label>
+          <input pInputText [(ngModel)]="doc.documentType" class="w-full" />
+        </div>
+
+        <div class="col-span-3">
+          <p-fileUpload mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="file[]"
+            accept="image/*,application/pdf" maxFileSize="1000000" (onSelect)="onFileSelect($event, i)">
+          </p-fileUpload>
+        </div>
+
+        <div class="col-span-1">
+          <p-button icon="pi pi-trash" severity="danger" *ngIf="studentFormData.documents.length > 1"
+            (click)="removeDocumentRow(i)">
+          </p-button>
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <p-button icon="pi pi-plus" label="Add Document" (click)="addDocumentRow()"></p-button>
+      </div>
+</div>
+  </ng-template>
+
+  <ng-template #footer>
+    <p-button label="Cancel" icon="pi pi-times" text (click)="studentdocumentDialog = false" />
+     <p-button label="Save" icon="pi pi-check" (click)="saveDocuments()" />
+  </ng-template>
+</p-dialog>
+
+
+
+<!-- <p-dialog>
+            <ng-template #content>
+                <div class="flex flex-col gap-6">
+
+                   <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-4">
+                            <label for="price" class="block font-bold mb-3">DocumentName</label>
+                            <p-select [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
+                        </div>
+                       
+                        <div class="col-span-4">
+                            <label for="price" class="block font-bold mb-3">DocumentType</label>
+                            <p-inputnumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US" fluid />
+                        </div>
+                        <div class="col-span-4">
+                        <p-fileupload #fu mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload($event)" />
+                       
+                        </div>
+                      
+                    </div>
+                   
+                      <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-4">
+                            <label for="price" class="block font-bold mb-3">DocumentName</label>
+                            <p-select [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
+                        </div>
+                       
+                        <div class="col-span-4">
+                            <label for="price" class="block font-bold mb-3">DocumentType</label>
+                            <p-inputnumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US" fluid />
+                        </div>
+                        <div class="col-span-4">
+                        <p-fileupload #fu mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload($event)" />
+                        
+                        </div>
+                      
+                    </div>
+                         <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-4">
+                            <label for="price" class="block font-bold mb-3">DocumentName</label>
+                            <p-select [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
+                        </div>
+                       
+                        <div class="col-span-4">
+                            <label for="price" class="block font-bold mb-3">DocumentType</label>
+                            <p-inputnumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US" fluid />
+                        </div>
+                        <div class="col-span-4">
+                        <p-fileupload #fu mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload($event)" />
+                        
+                        </div>
+                      
+                    </div>
+
+                        <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-4">
+                            <label for="price" class="block font-bold mb-3">DocumentName</label>
+                            <p-select [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" optionLabel="label" optionValue="label" placeholder="Select a Status" fluid />
+                        </div>
+                       
+                        <div class="col-span-4 gap-4">
+                            <label for="price" class="block font-bold mb-3">DocumentType</label>
+                            <p-inputnumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US" fluid />
+                        </div>
+                        <div class="col-span-4 gap-4">
+                        <p-fileupload #fu mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload($event)" />
+                        
+                        </div>
+                      
+                    </div>
+                   
+                     
+                </div>
+            </ng-template>
+
+            <ng-template #footer>
+                <p-button label="Cancel" icon="pi pi-times" text (click)="hideQualificationDialog()" />
+                <p-button label="Add Document" icon="pi pi-check" />
+            </ng-template>
+        </p-dialog> -->
+
+
+        
+<p-table
+   #dt
+  [value]="StudentsAdmissionByTallyPartnerIdList"
+  [rows]="10"
+  [paginator]="true"
+  [globalFilterFields]="['instituteName','instituteId']"
+  [tableStyle]="{ 'min-width': '75rem' }"
+  [rowHover]="true"
+  dataKey="instituteId"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} courses"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 30,40,50,60]"
+        >
+            <ng-template #caption>
+                <div class="flex items-center justify-between">
+                    <h5 class="m-0">Institute  Details</h5>
+                    <p-iconfield>
+                        <p-inputicon styleClass="pi pi-search" />
+                        <input pInputText type="text" placeholder="Search..." />
+                    </p-iconfield>
+                </div>
+            </ng-template>
+            <ng-template #header>
+                <tr>
+                    <th style="width: 3rem">
+                        <p-tableHeaderCheckbox />
+                    </th>
+                    <th style="min-width: 16rem">Institute ID</th>
+                    <th pSortableColumn="name" style="min-width:16rem">
+                        Student Name
+                        <p-sortIcon field="name" />
+                    </th>
+
+                      <th pSortableColumn="name" style="min-width:16rem">
+                        Course Name
+                        <p-sortIcon field="name" />
+                    </th>
+
+
+                        <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
+                        QualificationName
+                        <p-sortIcon field="inventoryStatus" />
+                    </th>
+                  
+                    <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
+                        Status
+                        <p-sortIcon field="inventoryStatus" />
+                    </th>
+                    <th style="min-width: 12rem"></th>
+                </tr>
+            </ng-template>
+            <ng-template #body  let-StudentsAdmissionByTallyPartner let-rowIndex="rowIndex">
+                <tr>
+                    <td style="width: 3rem">
+                        <p-tableCheckbox [value]="StudentsAdmissionByTallyPartner.studentId" />
+                    </td>
+      
+                       <td style="min-width: 12rem">{{ StudentsAdmissionByTallyPartner.studentId}} </td>
+                    <td style="min-width: 12rem">{{ StudentsAdmissionByTallyPartner.firstName + ' ' + StudentsAdmissionByTallyPartner.lastName }} </td>
+                    <td style="min-width: 16rem">{{ StudentsAdmissionByTallyPartner.courseName }}</td>
+                     <td style="min-width: 16rem"> </td>
+                    <!-- <td>
+                        <span [ngClass]="Institutes.isactive ? 'text-success' : 'text-danger'">
+
+                        <p-toggleswitch [(ngModel)]="Institutes.isactive" [ngModelOptions]="{standalone: true}" />
+                        {{ Institutes.isactive ? 'Active' : 'Inactive' }} </span>
+                    </td> -->
+                    <td>
+                        <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"    />
+                        <!-- <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" /> -->
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>

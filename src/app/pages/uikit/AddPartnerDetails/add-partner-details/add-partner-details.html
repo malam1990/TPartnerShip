@@ -1,0 +1,53 @@
+<p-fluid>
+
+        <div class="flex mt-8">
+            
+            <div class="card flex flex-col gap-6 w-full" >
+                
+                             <div class="custom-theme-btn p-ripple font-semibold text-xl">
+Add Partner Details 
+</div>
+
+            <!-- <input pInputText id="partnerid" type="hidden" [(ngModel)]="CourseQuantityForm.CourseQtyId" name="partnerid"   [ngModelOptions]="{standalone: true}" /> -->
+                 
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="RoleId">Role Name Type</label>
+                         <p-select [(ngModel)]="RoleForm.roleId"
+          [options]="RoleList"
+          optionValue="roleId"
+          optionLabel="roleName"
+          placeholder="Select Role "
+          class="w-full"
+          [ngModelOptions]="{standalone: true}"
+           (onChange)="onRoleChange($event)">
+        </p-select>
+                       
+                       </div>
+                  
+                </div>
+              
+                   
+             
+           
+              
+
+
+                
+         
+             
+   
+
+                 
+
+
+
+                 
+                 
+            </div>
+        
+        </div>
+
+         
+    </p-fluid>
+

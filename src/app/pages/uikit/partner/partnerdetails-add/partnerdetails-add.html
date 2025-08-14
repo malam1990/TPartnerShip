@@ -1,0 +1,529 @@
+<form (ngSubmit)="submitPartnerForm()" #partnerForm="ngForm">
+    <p-fluid>
+
+        <div class="flex mt-8">
+
+            <div class="card flex flex-col gap-6 w-full">
+              <div class="custom-theme-btn p-ripple font-semibold text-xl">
+  ADD MASTER TALLY PARTNER DETAILS
+</div>
+
+                <input pInputText id="partnerid" type="hidden" [(ngModel)]="partnerFormData.partnerid" name="partnerid"
+                    [ngModelOptions]="{standalone: true}" />
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="PartnerName1">PARTNER NAME</label>
+                        <input pInputText id="PartnerName1" type="text" [(ngModel)]="partnerFormData.partnerName"
+                            name="PartnerName"   required  pattern="^[A-Za-z ]+$"    #partnerName="ngModel" [ngModelOptions]="{standalone: true}" />
+                           <small *ngIf="partnerName.errors?.['required'] && partnerName.touched" class="text-red-500">
+  Partner Name is required
+</small>
+
+<small *ngIf="partnerName.errors?.['pattern'] && partnerName.touched" class="text-red-500">
+  Only letters and spaces are allowed
+</small>
+                        </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="SerailNo">Serial Number</label>
+                        <input pInputText id="SerailNo" type="text" [(ngModel)]="partnerFormData.serailNo"
+                            name="SerailNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="EmailId">EmailId</label>
+                        <input pInputText id="EmailId" type="text" [(ngModel)]="partnerFormData.emailId" name="EmailId"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <div class="flex flex-wrap gap-2 w-full">
+                            <label for="state">Institute Type</label>
+                            <p-select id="state" [(ngModel)]="partnerFormData.instituteName" [options]="institutes"
+                                optionValue="instituteName" optionLabel="instituteName"
+                                placeholder="Select Institute One" class="w-full"
+                                [ngModelOptions]="{standalone: true}"></p-select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">Place Type</label>
+                        <p-select id="state" [(ngModel)]="partnerFormData.placeName" [options]="partners"
+                            optionValue="placeName" optionLabel="placeName" placeholder="Select place One"
+                            class="w-full" [ngModelOptions]="{standalone: true}"></p-select>
+
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="NoPc">Number of PC's</label>
+                        <input pInputText id="NoPc" type="text" [(ngModel)]="partnerFormData.noPc" name="NoPc"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Status">Status</label>
+                        <!-- <input pInputText id="Status" type="text"  [(ngModel)]="partnerFormData.Status" name="Status"  [ngModelOptions]="{standalone: true}"/> -->
+                        <p-toggleswitch [(ngModel)]="partnerFormData.status" [ngModelOptions]="{standalone: true}" />
+                        <span class="ml-2">{{ partnerFormData.status ? true : false }}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="WebSite">WEBSITE</label>
+                        <input pInputText id="WebSite" type="text" [(ngModel)]="partnerFormData.webSite" name="WebSite"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="EmpanelmentExpireDate">Empanelment Expiry date</label>
+                        <!-- <p-calendar  [(ngModel)]="partnerFormData.empanelmentExpireDate"  id="EmpanelmentExpireDate"  [iconDisplay]="'input'" [showIcon]="true"  inputId="icondisplay"  [ngModelOptions]="{standalone: true}"> </p-calendar>  -->
+                        <input pInputText id="EmpanelmentExpireDate" type="text"
+                            [(ngModel)]="partnerFormData.empanelmentExpireDate" name="EmpanelmentExpireDate"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="EmpanelmentCertificate">Empanelment Certificate </label>
+                        <input pInputText id="EmpanelmentCertificate" type="text"
+                            [(ngModel)]="partnerFormData.empanelmentCertificate" name="EmpanelmentCertificate"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+
+                <div class="flex flex-wrap">
+                    <label for="address">Address</label>
+                    <textarea pTextarea id="address" rows="4" [(ngModel)]="partnerFormData.address" name="Address"
+                        [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">STATE</label>
+                        <input pInputText id="State" type="text" [(ngModel)]="partnerFormData.state" name="State"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="City">CITY</label>
+                        <input pInputText id="City" type="text" [(ngModel)]="partnerFormData.city" name="City"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Country">COUNTRY </label>
+                        <input pInputText id="Country" type="text" [(ngModel)]="partnerFormData.country" name="Country"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="PostalCode">PIN CODE </label>
+                        <input pInputText id="PostalCode" type="text" [(ngModel)]="partnerFormData.postalCode"
+                            name="PostalCode" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="LandLine1">LandLine1 </label>
+                        <input pInputText id="LandLine1" type="text" [(ngModel)]="partnerFormData.landLine1"
+                            name="LandLine1" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="LandLine2">LandLine1 </label>
+                        <input pInputText id="LandLine2" type="text" [(ngModel)]="partnerFormData.landLine2"
+                            name="LandLine2" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="MobileNo">MobileNo </label>
+                        <input pInputText id="MobileNo" type="text" [(ngModel)]="partnerFormData.mobileNo"
+                            name="MobileNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Fax">Fax </label>
+                        <input pInputText id="Fax" type="text" [(ngModel)]="partnerFormData.fax" name="Fax"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="MobileNo">Beneficiary Name </label>
+                        <input pInputText id="MobileNo" type="text" [(ngModel)]="partnerFormData.beneficiaryName"
+                            name="MobileNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Fax">Bank Account No </label>
+                        <input pInputText id="Fax" type="text" [(ngModel)]="partnerFormData.bankAccountNo" name="Fax"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="bankName">Bank Name </label>
+                        <input pInputText id="bankName" type="text" [(ngModel)]="partnerFormData.bankName"
+                            name="MobileNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="bankBranch">Bank Branch </label>
+                        <input pInputText id="bankBranch" type="text" [(ngModel)]="partnerFormData.bankBranch"
+                            name="Fax" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="cancelledCheque">Cancelled Cheque </label>
+                        <input pInputText id="cancelledCheque" type="text" [(ngModel)]="partnerFormData.cancelledCheque"
+                            name="MobileNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Fax">Pan No </label>
+                        <input pInputText id="panNo" type="text" [(ngModel)]="partnerFormData.panNo" name="panNo"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="gstin">GST IN </label>
+                        <input pInputText id="gstin" type="text" [(ngModel)]="partnerFormData.gstin" name="gstin"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="msme">MSME </label>
+                        <input pInputText id="msme" type="text" [(ngModel)]="partnerFormData.msme" name="Fax"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="tanNo">TAN NO </label>
+                        <input pInputText id="tanNo" type="text" [(ngModel)]="partnerFormData.tanNo" name="tanNo"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="password">Password </label>
+                        <input pInputText id="password" type="text" [(ngModel)]="partnerFormData.password"
+                            name="password" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Yof">Year </label>
+                        <input pInputText id="Yof" type="text" [(ngModel)]="partnerFormData.yof" name="Yof"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <input pInputText id="roleId" type="hidden" [(ngModel)]="partnerFormData.roleId" name="roleId"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-wrap gap-3 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Partnership Deed</div>
+                            <p-fileUpload name="partnershipDeedp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'partnershipDeedp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.partnershipDeedp"
+                                        [src]="'data:image/png;base64,' + partnerFormData.partnershipDeedp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Registration Certifcate</div>
+                            <p-fileUpload name="registrationCertifcatep" [multiple]="false"
+                                accept="image/*,application/pdf" maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'registrationCertifcatep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.registrationCertifcatep"
+                                        [src]="'data:image/png;base64,' + partnerFormData.registrationCertifcatep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Incorporation Certifcate</div>
+                            <p-fileUpload name="incorporationCertifcatep" [multiple]="false"
+                                accept="image/*,application/pdf" maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'incorporationCertifcatep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.incorporationCertifcatep"
+                                        [src]="'data:image/png;base64,' + partnerFormData.incorporationCertifcatep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Rent Lease Agreement</div>
+                            <p-fileUpload name="rentLeaseAgreementp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'rentLeaseAgreementp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.rentLeaseAgreementp"
+                                        [src]="'data:image/png;base64,' + partnerFormData.rentLeaseAgreementp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Cancelled Cheque</div>
+                            <p-fileUpload name="rentLeaseAgreementp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'cancelledChequep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.cancelledChequep"
+                                        [src]="'data:image/png;base64,' + partnerFormData.cancelledChequep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Pan Card</div>
+                            <p-fileUpload name="panCardp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'panCardp')">
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.panCardp"
+                                        [src]="'data:image/png;base64,' + partnerFormData.panCardp" width="150" />
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4"> Gst in Certificate</div>
+                            <p-fileUpload name="gstinCertificatep" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'gstinCertificatep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.gstinCertificatep"
+                                        [src]="'data:image/png;base64,' + partnerFormData.gstinCertificatep"
+                                        width="150" />
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4"> front View</div>
+                            <p-fileUpload name="frontViewp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'frontViewp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.frontViewp"
+                                        [src]="'data:image/png;base64,' + partnerFormData.frontViewp" width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4"> computer Lab </div>
+                            <p-fileUpload name="computerLabp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'computerLabp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.computerLabp"
+                                        [src]="'data:image/png;base64,' + partnerFormData.computerLabp" width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-4">
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>lecture Hall
+                            </div>
+                            <p-fileUpload name="lectureHallp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'lectureHallp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.lectureHallp"
+                                        [src]="'data:image/png;base64,' + partnerFormData.lectureHallp" width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>library
+                            </div>
+                            <p-fileUpload name="libraryp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'libraryp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.libraryp"
+                                        [src]="'data:image/png;base64,' + partnerFormData.libraryp" width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>office Space
+                            </div>
+                            <p-fileUpload name="officeSpacep" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'officeSpacep')">
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.officeSpacep"
+                                        [src]="'data:image/png;application/pdf;base64,' + partnerFormData.officeSpacep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="flex flex-col md:flex-row gap-4">
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>Reception Area
+                            </div>
+                            <p-fileUpload name="receptionAreap" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'receptionAreap')">
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.receptionAreap"
+                                        [src]="'data:image/png;base64,' + partnerFormData.receptionAreap" width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>other Photo
+                            </div>
+                            <p-fileUpload name="otherPhotop" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'otherPhotop')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.otherPhotop"
+                                        [src]="'data:image/png;base64/' + partnerFormData.otherPhotop" width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                        <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>other Photo
+                            </div>
+                            <p-fileUpload name="otherPhotop" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'otherPhotop')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="partnerFormData?.otherPhotop"
+                                        [src]="'data:image/png;base64/' + partnerFormData.otherPhotop" width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <!-- <p>Role ID: {{ partnerFormData.roleId }}</p> -->
+                        <p-select *ngIf="isEditMode" [(ngModel)]="partnerFormData.roleId" [options]="RoleList"
+                            optionValue="roleId" optionLabel="roleName" placeholder="Select Role" class="w-full"
+                            [ngModelOptions]="{standalone: true}" (onChange)="onRoleChange($event)">
+                        </p-select>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <input pInputText id="roleId" type="hidden" [(ngModel)]="partnerFormData.roleId" name="roleId"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <button pButton type="submit"> {{ partnerFormData.partnerid ? 'Update' : 'Submit'
+                            }}</button>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full"></div>
+                </div>
+
+            </div>
+        </div>
+    </p-fluid>
+
+</form>

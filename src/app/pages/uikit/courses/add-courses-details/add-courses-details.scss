@@ -1,0 +1,13 @@
+:host ::ng-deep .my-custom-btn {
+  //background-color: #7c3aed !important; /* violet */
+  color: #fff !important;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* subtle shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover state */
+:host ::ng-deep .my-custom-btn:hover {
+//  background-color: #6d28d9 !important; /* darker violet */
+  box-shadow: 0 6px 12px rgba(53, 52, 52, 0.25); /* bigger shadow */
+}

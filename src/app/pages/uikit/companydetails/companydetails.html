@@ -1,0 +1,84 @@
+<p-fluid>
+      
+        <div class="flex mt-8">
+            <div class="card flex flex-col gap-6 w-full">
+                <div class="font-semibold text-xl  flex  p-ripple">COMPANY DETAILS</div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">COMPANY NAME</label>
+                        <input pInputText id="firstname2" type="text"  [(ngModel)]="companyName" readonly [disabled]="true"/>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="lastname2">OWNER NAME</label>
+                        <input pInputText id="lastname2" type="text"  [(ngModel)]="ownerName" readonly [disabled]="true"/>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">EMAIL</label>
+                        <input pInputText id="firstname2" type="text" [(ngModel)]="email" readonly [disabled]="true" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="lastname2">PHONE</label>
+                        <input pInputText id="lastname2" type="text" [(ngModel)]="phone" readonly [disabled]="true"  />
+                    </div>
+                </div>
+                     <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">GST NUMBER</label>
+                        <input pInputText id="firstname2" type="text"  [(ngModel)]="gstNumber" readonly [disabled]="true"/>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="lastname2">PAN NUMBER</label>
+                        <input pInputText id="lastname2" type="text"   [(ngModel)]="panNumber" readonly [disabled]="true"/>
+                    </div>
+                </div>
+                   <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">CIN NUMBER</label>
+                        <input pInputText id="firstname2" type="text"   [(ngModel)]="cinNumber" readonly [disabled]="true"/>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="lastname2">WEBSITE</label>
+                        <input pInputText id="lastname2" type="text" [(ngModel)]="website" readonly [disabled]="true"/>
+                    </div>
+                </div>
+
+               <div class="flex flex-wrap">
+                    <label for="address">ADDRESS</label>
+                    <textarea pTextarea id="address" rows="4" [(ngModel)]="address" readonly [disabled]="true"></textarea>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">STATE</label>
+                        <input pInputText id="firstname2" type="text"  [(ngModel)]="state" readonly [disabled]="true"/>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="zip">CITY</label>
+                        <input pInputText id="zip" type="text" [(ngModel)]="city" readonly [disabled]="true"/>
+                    </div>
+                </div>
+                   <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">COUNTRY </label>
+                        <input pInputText id="firstname2" type="text"  [(ngModel)]="country" readonly [disabled]="true"/>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="lastname2">PIN CODE </label>
+                        <input pInputText id="lastname2" type="text" [(ngModel)]="pincode" readonly [disabled]="true" />
+                    </div>
+                </div>
+                     <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="firstname2">REGISTRATION DATE</label>
+                        <input pInputText id="firstname2" type="text" [(ngModel)]="registrationDate" readonly [disabled]="true"/>
+                    </div>
+                                 </div>
+                    <div class="flex flex-col md:flex-row gap-6">
+                   <p-button label="Submit" [disabled]="true"></p-button>
+                </div>
+            </div>
+        </div>
+    </p-fluid>
+

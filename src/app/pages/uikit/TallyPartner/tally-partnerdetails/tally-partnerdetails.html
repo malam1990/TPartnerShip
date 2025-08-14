@@ -1,0 +1,714 @@
+<div class="card flex flex-col flex flex-col gap-1 w-full ">
+    <div class="custom-theme-btn p-ripple font-semibold text-xl  ">
+        Tally Partner  Details
+    </div>
+
+    <div class="card">
+
+        <p-table #dt1 [value]="tppartnerList" dataKey="partnerid" [rows]="10" [loading]="loading" [rowHover]="true"
+            [showGridlines]="true" [paginator]="true"
+            [globalFilterFields]="['partnerName', 'emailId', 'serailNo', 'placeName', 'status']"
+            responsiveLayout="scroll">
+            <ng-template #caption>
+                <div class="flex justify-between items-center flex-column sm:flex-row">
+                    <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
+                        (click)="clear(dt1)"></button>
+                    <p-iconfield iconPosition="left" class="ml-auto">
+                        <p-inputicon>
+                            <i class="pi pi-search"></i>
+                        </p-inputicon>
+                        <input pInputText type="text" (input)="onGlobalFilter(dt1, $event)"
+                            placeholder="Search keyword" />
+                    </p-iconfield>
+                </div>
+            </ng-template>
+            <ng-template #header>
+                <tr>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Partner Id
+                            <p-columnFilter type="text" field="name" display="menu"
+                                placeholder="Search by name"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Partner Name
+                            <p-columnFilter type="text" field="partnerName" display="menu"
+                                placeholder="Search by name"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Serail No
+                            <p-columnFilter type="text" field="SerailNo" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Email Id
+                            <p-columnFilter type="text" field="emailId" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Web Site
+                            <p-columnFilter type="text" field="WebSite" display="menu"
+                                placeholder="Search by Website"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            yof
+                            <p-columnFilter type="date" field="yof" display="menu"
+                                placeholder="mm/dd/yyyy"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            instituteName
+                            <p-columnFilter type="text" field="instituteName" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            placeName
+                            <p-columnFilter type="text" field="placeName" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            noPc
+                            <p-columnFilter type="text" field="Partner.noPc" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Status
+                            <p-columnFilter field="status" matchMode="equals" display="menu">
+                                <ng-template #filter let-value let-filter="filterCallback">
+                                    <p-select [ngModel]="value" [options]="statuses" (onChange)="filter($event.value)"
+                                        placeholder="Any" [style]="{ 'min-width': '12rem' }">
+                                        <ng-template let-option #item>
+                                            <span [class]="'customer-badge status-' + option.value">{{ option.label
+                                                }}</span>
+                                        </ng-template>
+                                    </p-select>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            empanelmentExpireDate
+                            <p-columnFilter type="date" field="date" display="menu"
+                                placeholder="mm/dd/yyyy"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            empanelmentCertificate
+                            <p-columnFilter type="text" field="Partner.empanelmentCertificate" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            address
+                            <p-columnFilter type="text" field="Partner.Address" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            city
+                            <p-columnFilter type="text" field="Partner.City" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            state
+                            <p-columnFilter type="text" field="Partner.STATE" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            country
+                            <p-columnFilter type="text" field="Partner.country" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            postalCode
+                            <p-columnFilter type="text" field="Partner.postalCode" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            landLine1
+                            <p-columnFilter type="text" field="Partner.landLine1" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            landLine2
+                            <p-columnFilter type="text" field="Partner.landLine2" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            mobileNo
+                            <p-columnFilter type="text" field="Partner.MobileNo" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            fax
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Beneficiary Name
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Bank Account No
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Bank Name
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Bank Branch
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Cancelled Cheque No
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Pan No
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Gst in
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Msme
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Tan No
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Password
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Role ID
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Partnership Deed
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Registration Certifcate
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Incorporation Certifcate
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Rent Lease Agreement
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Cancelled Cheque
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Gstin Certificate
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Pan Card
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Front View
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Computer Lab
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Lecture Hall
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Library
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Office Space
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Reception Area
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-between items-center">
+                            Other Photop
+                            <p-columnFilter type="text" field="Partner.fax" display="menu"
+                                placeholder="Search by country"></p-columnFilter>
+                        </div>
+                    </th>
+
+<!-- 
+                    <th style="min-width: 2rem">
+                        <div class="flex justify-between items-center">
+                         Update 
+                        </div>
+                    </th>
+                    <th style="min-width: 2rem">
+                        <div class="flex justify-between items-center">
+                            Delete
+                        </div>
+                    </th> -->
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-tppartner>
+                <tr>
+                    <td>
+                        {{ tppartner.tallypartnerId }}
+                    </td>
+                    <td>
+                        <div class="flex items-center gap-2">
+                            <!-- <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" width="30" /> -->
+                            <span>{{ tppartner.tpname }}</span>
+                        </div>
+                    </td>
+                    <!-- <td>
+                            <div class="flex items-center gap-2">
+                                <img [alt]="customer.representative.name" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}" width="32" style="vertical-align: middle" />
+                                <span class="image-text">{{ customer.representative.name }}</span>
+                            </div>
+                        </td> -->
+                    <td>
+                        {{ tppartner.tpSerailNo }}
+                        <!-- {{ customer.date | date: 'MM/dd/yyyy' }} -->
+                    </td>
+                    <td>
+                        {{ tppartner.tpEmailId }}
+                        <!-- {{ customer.date | date: 'MM/dd/yyyy' }} -->
+                    </td>
+                    <td>
+                        {{ tppartner.tpWebSite }}
+                        <!-- {{ customer.balance | currency: 'USD' : 'symbol' }} -->
+                    </td>
+                    <td>
+                        {{ tppartner.tpYof | date: 'MM/dd/yyyy' }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td>
+                        {{ tppartner.instituteName }}
+                        <!-- <p-progressbar [value]="customer.activity" [showValue]="false" [style]="{ height: '0.5rem' }" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.placeName }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpNoPc }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+
+                        <span [ngClass]="tppartner.status ? 'text-success' : 'text-danger'">
+
+                            <p-toggleswitch [(ngModel)]="tppartner.tpStatus" [ngModelOptions]="{standalone: true}" />
+                            {{ tppartner.tpStatus ? 'Active' : 'Inactive' }} </span>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpEmpanelmentExpireDate | date: 'MM/dd/yyyy' }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpEmpanelmentCertificate }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpAddress }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpCity }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpState }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpCountry }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpPostalCode }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpLandLine1 }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpLandLine2 }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpMobileNo }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpFax }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        {{ tppartner.tpBeneficiaryName }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpBankAccountNo }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpBankName }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpBankBranch }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpCancelledCheque }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpPanNo }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpGstin }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpMsme }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpTanNo }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tpPassword }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+                        {{ tppartner.tproleId }}
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+                        <button *ngIf="tppartner.tppartnershipDeedp && tppartner.tppartnershipDeedp.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tppartnershipDeedp)">
+                            Partnership Deed
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+                        <button *ngIf="tppartner.tpregistrationCertifcatep && tppartner.tpregistrationCertifcatep.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpregistrationCertifcatep)">
+                            Registration Certifcate
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+
+                        <button
+                            *ngIf="tppartner.tpincorporationCertifcatep && tppartner.tpincorporationCertifcatep.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpincorporationCertifcatep)">
+                            Incorporation Certifcate
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+
+                        <button *ngIf="tppartner.tprentLeaseAgreementp && tppartner.tprentLeaseAgreementp.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tprentLeaseAgreementp)">
+                            Rent Lease Agreement
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        <button *ngIf="tppartner.tpcancelledChequep && tppartner.tpcancelledChequep.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpcancelledChequep)">
+                            Cancelled Cheque
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+
+                    <td class="text-center">
+
+                        <button *ngIf="tppartner.tppanCardp && tppartner.tppanCardp.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tppanCardp)">
+                            Pan Card
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+
+                        <button *ngIf="tppartner.tpgstinCertificatep && tppartner.tpgstinCertificatep.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpgstinCertificatep)">
+                            Gstin Certificate
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+                        <button *ngIf="tppartner.tpfrontViewp && tppartner.tpfrontViewp.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpfrontViewp)">
+                            Cancelled Cheque
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+                        <button *ngIf="tppartner.tpcomputerLabp && tppartner.tpcomputerLabp.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpcomputerLabp)">
+                            Computer Lab
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+                    <td class="text-center">
+
+
+                        <button *ngIf="tppartner.tplectureHallp && tppartner.tplectureHallp.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tplectureHallp)">
+                            Lecture Hall
+                        </button>
+
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+
+
+
+                        <button *ngIf="tppartner.tplibraryp && tppartner.tplibraryp.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tplibraryp)">
+                            Library
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+
+                        <button *ngIf="tppartner.tpofficeSpacep && tppartner.tpofficeSpacep.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpofficeSpacep)">
+                            Office Space
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+
+                        <button *ngIf="tppartner.tpreceptionAreap && tppartner.tpreceptionAreap.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpreceptionAreap)">
+                            Reception Area
+                        </button>
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <td class="text-center">
+                        <button *ngIf="tppartner.tpotherPhotop && tppartner.tpotherPhotop.trim() !== ''"
+                            (click)="openFileInNewTab(tppartner.tpotherPhotop)">
+                            other Photo
+                        </button>
+
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+
+
+                    <!-- <td class="text-center"> -->
+                        <!-- Button to open image -->
+
+
+                        <!-- Button to open PDF -->
+                        <!-- <button (click)="openFileInNewTab(partner.partnershipDeedp)">Open Partnership Deed (PDF)</button> -->
+
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    <!-- </td> -->
+
+                  
+                    <!-- <td class="text-center"> -->
+                        <!-- <p-button icon="pi pi-times" severity="danger" rounded outlined /> -->
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    <!-- </td> -->
+
+                    <td class="text-center">
+                        <p-button icon="pi pi-check" rounded outlined (click)="edittallyPartner(tppartner)" />
+                        <!-- <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    </td>
+                    <!-- <td class="text-center">
+                        <p-button icon="pi pi-times" severity="danger" rounded outlined />
+                      <p-tag [value]="customer.status.toLowerCase()" [severity]="getSeverity(customer.status.toLowerCase())" styleClass="dark:!bg-surface-900" /> -->
+                    <!-- </td> --> 
+                </tr>
+            </ng-template>
+
+            <!-- <ng-template #emptymessage>
+                    <tr>
+                        <td colspan="8">No customers found.</td>
+                    </tr>
+                </ng-template>
+                <ng-template #loadingbody>
+                    <tr>
+                        <td colspan="8">Loading customers data. Please wait.</td>
+                    </tr>
+                </ng-template> -->
+        </p-table>
+    </div>
+</div>

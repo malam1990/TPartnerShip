@@ -1,0 +1,554 @@
+<form (ngSubmit)="submitTallyPartnerForm()" #partnerForm="ngForm">
+    <p-fluid>
+
+        <div class="flex mt-8">
+
+            <div class="card flex flex-col gap-6 w-full">
+
+                <div class="custom-theme-btn p-ripple font-semibold text-xl">
+                    ADD TALLY PARTNER DETAILS
+                </div>
+                <input pInputText id="tallypartnerId" type="hidden" [(ngModel)]="tallyPartnerFormData.tallypartnerId"
+                    name="partnerid" [ngModelOptions]="{standalone: true}" />
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="PartnerName1"> TALLY PARTNER NAME</label>
+                        <input pInputText id="PartnerName1" type="text" [(ngModel)]="tallyPartnerFormData.tpname"
+                            name="PartnerName" required pattern="^(?!\\s*$)[A-Za-z ]+$"
+                            (ngModelChange)="tallyPartnerFormData.tpname = $event.trimStart()" #tpname="ngModel"
+                            [ngModelOptions]="{standalone: true}" />
+                        <small *ngIf="tpname.errors?.['required'] && tpname.touched" class="text-red-500">
+                            Name is required
+                        </small>
+                        <small *ngIf="tpname.errors?.['minlength'] && tpname.touched" class="text-red-500">
+                            Name e characters required
+                        </small>
+
+                        <small *ngIf="tpname.errors?.['pattern'] && tpname.touched" class="text-red-500">
+                            Only letters and spaces are allowed
+                        </small>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="SerialNo">Serial Number</label>
+                        <input pInputText id="SerialNo" type="text" [(ngModel)]="tallyPartnerFormData.tpSerailNo"
+                            name="SerialNo" required minlength="5" maxlength="15" pattern="^(?!\s*$)[0-9]+$"
+                            #serialNo="ngModel" />
+
+                        <!-- Error: Required -->
+                        <small *ngIf="serialNo.errors?.['required'] && serialNo.touched" class="text-red-500">
+                            Serial Number is required
+                        </small>
+
+                        <!-- Error: Min length -->
+                        <small *ngIf="serialNo.errors?.['minlength'] && serialNo.touched" class="text-red-500">
+                            Minimum 5 digits required
+                        </small>
+
+                        <!-- Error: Pattern -->
+                        <small *ngIf="serialNo.errors?.['pattern'] && serialNo.touched" class="text-red-500">
+                            Only numbers are allowed
+                        </small>
+                    </div>
+
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="EmailId">Email ID</label>
+                        <input pInputText id="EmailId" type="email" [(ngModel)]="tallyPartnerFormData.tpEmailId"
+                            name="EmailId" required email pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$"
+                            #emailId="ngModel" />
+
+                        <!-- Required -->
+                        <small *ngIf="emailId.errors?.['required'] && emailId.touched" class="text-red-500">
+                            Email is required
+                        </small>
+
+                        <!-- Invalid email -->
+                        <small *ngIf="(emailId.errors?.['email'] || emailId.errors?.['pattern']) && emailId.touched"
+                            class="text-red-500">
+                            Please enter a valid email address
+                        </small>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <div class="flex flex-wrap gap-2 w-full">
+                            <label for="instituteType">Institute Type</label>
+                            <p-select id="instituteType" [(ngModel)]="tallyPartnerFormData.instituteName"
+                                [options]="institutes" optionValue="instituteName" optionLabel="instituteName"
+                                placeholder="Select Institute One" class="w-full" required #instituteType="ngModel"
+                                [ngModelOptions]="{standalone: true}">
+                            </p-select>
+
+                            <!-- Validation message -->
+                            <small *ngIf="instituteType.errors?.['required'] && instituteType.touched"
+                                class="text-red-500">
+                                Please select an institute type
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">Place Type</label>
+                        <p-select id="state" [(ngModel)]="tallyPartnerFormData.placeName" [options]="tallypartners"
+                            optionValue="placeName" optionLabel="placeName" placeholder="Select place One"
+                            class="w-full" [ngModelOptions]="{standalone: true}"></p-select>
+
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="NoPc">Number of PC's</label>
+                        <input pInputText id="NoPc" type="text" [(ngModel)]="tallyPartnerFormData.tpNoPc" name="NoPc"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Status">Status</label>
+                        <!-- <input pInputText id="Status" type="text"  [(ngModel)]="partnerFormData.Status" name="Status"  [ngModelOptions]="{standalone: true}"/> -->
+                        <p-toggleswitch [(ngModel)]="tallyPartnerFormData.tpStatus"
+                            [ngModelOptions]="{standalone: true}" />
+                        <span class="ml-2">{{ tallyPartnerFormData.tpStatus ? true : false }}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="WebSite">WEBSITE</label>
+                        <input pInputText id="WebSite" type="text" [(ngModel)]="tallyPartnerFormData.tpWebSite"
+                            name="WebSite" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="EmpanelmentExpireDate">Empanelment Expiry date</label>
+                        <!-- <p-calendar  [(ngModel)]="partnerFormData.empanelmentExpireDate"  id="EmpanelmentExpireDate"  [iconDisplay]="'input'" [showIcon]="true"  inputId="icondisplay"  [ngModelOptions]="{standalone: true}"> </p-calendar>  -->
+                        <input pInputText id="EmpanelmentExpireDate" type="text"
+                            [(ngModel)]="tallyPartnerFormData.tpEmpanelmentExpireDate" name="EmpanelmentExpireDate"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="EmpanelmentCertificate">Empanelment Certificate </label>
+                        <input pInputText id="EmpanelmentCertificate" type="text"
+                            [(ngModel)]="tallyPartnerFormData.tpEmpanelmentCertificate" name="EmpanelmentCertificate"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+
+                <div class="flex flex-wrap">
+                    <label for="tpaddress">Address</label>
+                    <textarea pTextarea id="tpaddress" rows="4" [(ngModel)]="tallyPartnerFormData.tpAddress"
+                        name="Address" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="state">STATE</label>
+                        <input pInputText id="State" type="text" [(ngModel)]="tallyPartnerFormData.tpState" name="State"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="City">CITY</label>
+                        <input pInputText id="City" type="text" [(ngModel)]="tallyPartnerFormData.tpCity" name="City"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Country">COUNTRY </label>
+                        <input pInputText id="Country" type="text" [(ngModel)]="tallyPartnerFormData.tpCountry"
+                            name="Country" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="PostalCode">PIN CODE </label>
+                        <input pInputText id="PostalCode" type="text" [(ngModel)]="tallyPartnerFormData.tpPostalCode"
+                            name="PostalCode" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="LandLine1">LandLine1 </label>
+                        <input pInputText id="LandLine1" type="text" [(ngModel)]="tallyPartnerFormData.tpLandLine1"
+                            name="LandLine1" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="LandLine2">LandLine1 </label>
+                        <input pInputText id="LandLine2" type="text" [(ngModel)]="tallyPartnerFormData.tpLandLine2"
+                            name="LandLine2" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="MobileNo">MobileNo </label>
+                        <input pInputText id="MobileNo" type="text" [(ngModel)]="tallyPartnerFormData.tpMobileNo"
+                            name="MobileNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Fax">Fax </label>
+                        <input pInputText id="Fax" type="text" [(ngModel)]="tallyPartnerFormData.tpFax" name="Fax"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Yof">Year </label>
+                        <input pInputText id="Yof" type="text" [(ngModel)]="tallyPartnerFormData.tpYof" name="Yof"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="MobileNo">Beneficiary Name </label>
+                        <input pInputText id="MobileNo" type="text" [(ngModel)]="tallyPartnerFormData.tpBeneficiaryName"
+                            name="MobileNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Fax">Bank Account No </label>
+                        <input pInputText id="Fax" type="text" [(ngModel)]="tallyPartnerFormData.tpBankAccountNo"
+                            name="Fax" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="bankName">Bank Name </label>
+                        <input pInputText id="bankName" type="text" [(ngModel)]="tallyPartnerFormData.tpBankName"
+                            name="MobileNo" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="bankBranch">Bank Branch </label>
+                        <input pInputText id="bankBranch" type="text" [(ngModel)]="tallyPartnerFormData.tpBankBranch"
+                            name="Fax" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="cancelledCheque">Cancelled Cheque </label>
+                        <input pInputText id="cancelledCheque" type="text"
+                            [(ngModel)]="tallyPartnerFormData.tpCancelledCheque" name="MobileNo"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="Fax">Pan No </label>
+                        <input pInputText id="panNo" type="text" [(ngModel)]="tallyPartnerFormData.tpPanNo" name="panNo"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="gstin">GST IN </label>
+                        <input pInputText id="gstin" type="text" [(ngModel)]="tallyPartnerFormData.tpGstin" name="gstin"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="msme">MSME </label>
+                        <input pInputText id="msme" type="text" [(ngModel)]="tallyPartnerFormData.tpMsme" name="Fax"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="tanNo">TAN NO </label>
+                        <input pInputText id="tanNo" type="text" [(ngModel)]="tallyPartnerFormData.tpTanNo" name="tanNo"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <label for="password">Password </label>
+                        <input pInputText id="password" type="text" [(ngModel)]="tallyPartnerFormData.tpPassword"
+                            name="password" [ngModelOptions]="{standalone: true}" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-12">
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Partnership Deed</div>
+                            <p-fileUpload name="partnershipDeedp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'partnershipDeedp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tppartnershipDeedp"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tppartnershipDeedp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Registration Certifcate</div>
+                            <p-fileUpload name="tpregistrationCertifcatep" [multiple]="false"
+                                accept="image/*,application/pdf" maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpregistrationCertifcatep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpregistrationCertifcatep"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tpregistrationCertifcatep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Incorporation Certifcate</div>
+                            <p-fileUpload name="tpincorporationCertifcatep" [multiple]="false"
+                                accept="image/*,application/pdf" maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpincorporationCertifcatep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpincorporationCertifcatep"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tpincorporationCertifcatep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flex flex-col md:flex-row gap-12">
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Rent Lease Agreement</div>
+                            <p-fileUpload name="tprentLeaseAgreementp" [multiple]="false"
+                                accept="image/*,application/pdf" maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tprentLeaseAgreementp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tprentLeaseAgreementp"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tprentLeaseAgreementp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Cancelled Cheque</div>
+                            <p-fileUpload name="tpcancelledChequep" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpcancelledChequep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpcancelledChequep"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tpcancelledChequep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">Pan Card</div>
+                            <p-fileUpload name="tppanCardp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tppanCardp')">
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tppanCardp"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tppanCardp"
+                                        width="150" />
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-12">
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4"> Gst in Certificate</div>
+                            <p-fileUpload name="tpgstinCertificatep" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpgstinCertificatep')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpgstinCertificatep"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tpgstinCertificatep"
+                                        width="150" />
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4"> front View</div>
+                            <p-fileUpload name="tpfrontViewp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpfrontViewp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpfrontViewp"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tpfrontViewp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4"> computer Lab </div>
+                            <p-fileUpload name="tpcomputerLabp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpcomputerLabp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpcomputerLabp"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tpcomputerLabp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-12">
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>lecture Hall
+                            </div>
+                            <p-fileUpload name="tplectureHallp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tplectureHallp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tplectureHallp"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tplectureHallp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>library
+                            </div>
+                            <p-fileUpload name="tplibraryp" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tplibraryp')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tplibraryp"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tplibraryp"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>office Space
+                            </div>
+                            <p-fileUpload name="tpofficeSpacep" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpofficeSpacep')">
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpofficeSpacep"
+                                        [src]="'data:image/png;application/pdf;base64,' + tallyPartnerFormData.tpofficeSpacep"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="flex flex-col md:flex-row gap-12">
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>Reception Area
+                            </div>
+                            <p-fileUpload name="tpreceptionAreap" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpreceptionAreap')">
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpreceptionAreap"
+                                        [src]="'data:image/png;base64,' + tallyPartnerFormData.tpreceptionAreap"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+                            </p-fileUpload>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 w-full">
+                        <div class="card">
+                            <div class="font-semibold text-xl mb-4">
+                                <Legend></Legend>other Photo
+                            </div>
+                            <p-fileUpload name="tpotherPhotop" [multiple]="false" accept="image/*,application/pdf"
+                                maxFileSize="2000000" customUpload="true"
+                                (onSelect)="onFileSelected($event, 'tpotherPhotop')">
+
+                                <ng-template #empty>
+                                    <img *ngIf="tallyPartnerFormData?.tpotherPhotop"
+                                        [src]="'data:image/png;base64/' + tallyPartnerFormData.tpotherPhotop"
+                                        width="150" />
+                                    <div>Drag and drop files here to upload.</div>
+                                </ng-template>
+
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="flex flex-wrap gap-2 w-full">
+                        <!-- <p>Role ID: {{ tallyPartnerFormData.tproleId }}</p> -->
+                        <p-select *ngIf="isEditMode" [(ngModel)]="tallyPartnerFormData.tproleId" [options]="RoleList"
+                            optionValue="roleId" optionLabel="roleName" placeholder="Select Role" class="w-full"
+                            [ngModelOptions]="{standalone: true}" (onChange)="onRoleChange($event)">
+                        </p-select> <input pInputText id="roleId" type="hidden"
+                            [(ngModel)]="tallyPartnerFormData.tproleId" name="roleId"
+                            [ngModelOptions]="{standalone: true}" />
+                    </div>
+                    <button pButton type="submit"> {{ tallyPartnerFormData.tallypartnerId ? 'Update' : 'Submit'
+                        }}</button>
+                </div>
+
+            </div>
+        </div>
+
+    </p-fluid>
+
+</form>

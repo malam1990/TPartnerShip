@@ -1,0 +1,14 @@
+/* Scoped style that adapts to PrimeNG theme */
+:host ::ng-deep .custom-theme-btn {
+  background-color: var(--p-primary-color);
+  color: var(--p-primary-contrast-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  /* Shadow */
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* X, Y, blur, spread, color */
+}

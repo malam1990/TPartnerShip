@@ -1,0 +1,105 @@
+<p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        
+               <p-button 
+  label="Add Place Details" 
+  icon="pi pi-plus" 
+  class="mr-2 my-custom-btn" 
+  (onClick)="openNew()" />
+    </ng-template>
+   
+</p-toolbar>
+
+<p-table
+              #dt
+  [value]="PlaceList"
+  [rows]="10"
+  [paginator]="true"
+  [globalFilterFields]="['placeName']"
+  [tableStyle]="{ 'min-width': '75rem' }"
+  [(selection)]="selectedCourses"
+  [rowHover]="true"
+  dataKey="courseId"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} courses"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 30,40,50,60]"
+        >
+            <ng-template #caption>
+                <div class="flex items-center justify-between">
+                    <h5 class="m-0">Place  Details</h5>
+                    <p-iconfield>
+                        <p-inputicon styleClass="pi pi-search" />
+                        <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+                    </p-iconfield>
+                </div>
+            </ng-template>
+            <ng-template #header>
+                <tr>
+                    <th style="width: 3rem">
+                        <p-tableHeaderCheckbox />
+                    </th>
+                    <th style="min-width: 16rem">Place ID</th>
+                    <th pSortableColumn="name" style="min-width:16rem">
+                        Place Name
+                        <p-sortIcon field="name" />
+                    </th>
+                  
+                    <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
+                        Status
+                        <p-sortIcon field="inventoryStatus" />
+                    </th>
+                    <th style="min-width: 12rem"></th>
+                </tr>
+            </ng-template>
+            <ng-template #body  let-Place let-rowIndex="rowIndex">
+                <tr>
+                    <td style="width: 3rem">
+                        <p-tableCheckbox [value]="Place" />
+                    </td>
+                    <td style="min-width: 12rem"> {{ Place.placeId }}</td>
+                    <td style="min-width: 16rem">{{ Place.placeName }}</td>
+                    
+                    <td>
+                       <p-toggleswitch [(ngModel)]="Place.isActive"  [ngModelOptions]="{standalone: true}"  />
+          {{ Place.isActive ? 'Active' : 'Inactive' }} 
+                    </td>
+                    <td>
+                        <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"    (click)="editPlace(Place)"/>
+                        <!-- <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" /> -->
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+<p-dialog [(visible)]="CourseQtyDialog" [style]="{ width: '450px' }" header="Add Place Details" [modal]="true">
+    <ng-template #content>
+
+        <input pInputText id="placeId" type="hidden" [(ngModel)]="PlaceFormData.placeId" name="placeId"
+            [ngModelOptions]="{standalone: true}" />
+        <div class="flex flex-col gap-6">
+        
+            <div>
+                <label for="name" class="block font-bold mb-3">Place Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="PlaceFormData.placeName" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !PlaceFormData.placeName">Place Name is required.</small>
+            </div>
+            <div>
+                <label for="description" class="block font-bold mb-3">Status</label>
+                <p-toggleswitch [(ngModel)]="PlaceFormData.isActive"
+                    [ngModelOptions]="{standalone: true}"></p-toggleswitch>
+                <span class="ml-2 text-sm">{{ PlaceFormData.isActive ? 'Active' : 'Inactive' }}</span>
+            </div>
+
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="savePlace()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />
+
+
+

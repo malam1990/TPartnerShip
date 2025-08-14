@@ -1,0 +1,106 @@
+<div class="card">
+    <div class="font-semibold text-xl mb-4">Sell Course To Tally Partner Details</div>
+    <p-table
+        #dt1
+        [value]="SellcoursetotpList"
+        dataKey="partnerid"
+        [rows]="10"
+        [loading]="loading"
+        [rowHover]="true"
+        [showGridlines]="true"
+        [paginator]="true"
+        [globalFilterFields]="['id', 'company_name', 'course_Name', 'masterPartnerName', 'quantity', 'soldAt']"
+        responsiveLayout="scroll"
+    >
+        <ng-template #caption>
+            <div class="flex justify-between items-center flex-column sm:flex-row">
+                <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
+                    (click)="clear(dt1)"></button>
+                <p-iconfield iconPosition="left" class="ml-auto">
+                    <p-inputicon>
+                        <i class="pi pi-search"></i>
+                    </p-inputicon>
+                    <input pInputText type="text" (input)="onGlobalFilter(dt1, $event)" placeholder="Search keyword" />
+                </p-iconfield>
+            </div>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th style="min-width: 12rem">
+                    <div class="flex justify-between items-center">
+                        Id
+                         <p-columnFilter type="text" field="id" display="menu" placeholder="Search..." />
+                    </div>
+                </th>
+                <th style="min-width: 12rem">
+                    <div class="flex justify-between items-center">
+                        Company Name
+                        <p-columnFilter type="text" field="partnerName" display="menu"
+                            placeholder="Search by name"></p-columnFilter>
+                    </div>
+                </th>
+                <th style="min-width: 12rem">
+                    <div class="flex justify-between items-center">
+                        Master Tally Partner
+                        <p-columnFilter type="text" field="masterPartnerName" display="menu" placeholder="Search..." />
+                    </div>
+                </th>
+                <th style="min-width: 12rem">
+                    <div class="flex justify-between items-center">
+                         Course Name
+                        <p-columnFilter type="text" field="course_Name" display="menu" placeholder="Search..." />
+                    </div>
+                </th>
+
+                <th style="min-width: 12rem">
+                    <div class="flex justify-between items-center">
+                        Quantity
+                      <p-columnFilter type="text" field="quantity" display="menu" placeholder="Search..." />
+                    </div>
+                </th>
+                <th style="min-width: 12rem">
+                    <div class="flex justify-between items-center">
+                        Sold Out Date
+                         <p-columnFilter type="date" field="soldAt" display="menu" placeholder="mm/dd/yyyy" />
+                    </div>
+                </th>
+               
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body"  let-selltotp>
+            <tr>
+                <td>
+                    {{ selltotp.id }}
+                </td>
+                <td>
+                    <div class="flex items-center gap-2">
+                       
+                        <span>{{ selltotp.company_name }}</span>
+                    </div>
+                </td>
+               
+                <td>
+                    {{ selltotp.tallyPartnerName }}
+                   
+                </td>
+                <td>
+                    {{ selltotp.course_Name }}
+                   
+                </td>
+                <td>
+                    {{ selltotp.quantity }}
+                    
+                </td>
+                <td>
+                    {{ selltotp.soldAt | date: 'MM/dd/yyyy' }}
+                    </td>
+               
+          
+            </tr>
+        </ng-template>
+
+       
+    </p-table>
+</div>
+
